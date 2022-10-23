@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Video For Dualite</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .video-container{
+            position: relative;
+            width: 80%;
+            height: 80vh;
+            margin:3rem auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+        #video{
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 0;
+        }
+        .disable{
+            display: none;
+        }
+        .enable{
+            position: absolute;
+            z-index: 1;
+            top:10px;
+            right: 15px;
+
+        }
+        .btn{
+            background-color: rgba(110,80,180);
+            padding: 5px 12px;
+            border-radius:5px;
+            font-size: 14px;
+            color:#fff;
+            border: none;
+        }
+        .btn a{
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="main-container">
+        <div class="video-container">
+            <video id="video" controls autoplay  src="3.mp4"></video>
+            <div class="btn-container disable">
+                <button class="btn">
+                    <a href="index.html">Video 1</a>
+                </button>
+                <button class="btn">
+                     <a href="video2.html">Video 2</a>
+                </button>
+                <button class="btn">
+                    <a href="https://www.google.com"><i class="fab fa-google"></i></a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const video = document.getElementById('video');
+        const btnContainer = document.querySelector('.btn-container')
+
+        function mediaWatched (curr) {
+            if(curr >= 50){
+                btnContainer.classList.remove('disable')
+                btnContainer.classList.add('enable')
+            }else{
+                btnContainer.classList.remove('enable')
+                btnContainer.classList.add('disable')
+            }
+        console.log(`${curr}% of media watched`)
+}
+
+
+        function handleTimeupdate (e) {    
+            mediaWatched(Math.ceil((video.currentTime / video.duration) * 100));
+        }
+
+        video.addEventListener("timeupdate", handleTimeupdate);
+    </script>
+</body>
+</html>
